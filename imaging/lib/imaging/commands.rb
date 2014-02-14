@@ -1,7 +1,7 @@
 require 'digest'
 
-module Eikona
-    module Imaging
+module Imaging
+    module Commands
         HOME = `echo $HOME`.sub("\n", "")
         MOGRIFY = "mogrify"
         CONVERT = "convert"
@@ -10,11 +10,19 @@ module Eikona
         WATERMARK = {
                         :big => {
                             :path => 'watermark.jpg',
-                            :gravity => 'south'
+                            :gravity => 'south',
+                            :scale => 1,
+                            :x_rel_offset => 0,
+                            :y_rel_offset => 0.1459,
+                            :compose_method => 'hardlight'
                         },
                         :small => {
                             :path => 'watermark-small.jpg',
-                            :gravity => 'south west'
+                            :gravity => 'SouthWest',
+                            :scale => 0.3,
+                            :x_rel_offset => 0,
+                            :y_rel_offset => 0,
+                            :compose_method => 'hardlight'
                         }
                     }
 
@@ -39,7 +47,7 @@ module Eikona
         end
 
         def self.watermark(type, path)
-            `#{CONVERT} '#{HOME}/#{WATERMARK[type][:path]}' -resize #{get_w(path)} miff:- | convert -compose hardlight -composite -geometry +0+#{(get_h(path)*0.1459).to_i} -gravity #{WATERMARK[type][:gravity]} '#{path}' - -set filename:orig %t wm-%[filename:orig].jpg`
+            `#{CONVERT} '#{HOME}/#{WATERMARK[type][:path]}' -resize #{get_w(path)*WATERMARK[type][:scale]} miff:- | convert -compose #{WATERMARK[type][:compose_method]} -composite -geometry +#{(get_w(path)*WATERMARK[type][:x_rel_offset]).to_i}+#{(get_h(path)*WATERMARK[type][:y_rel_offset]).to_i} -gravity #{WATERMARK[type][:gravity]} '#{path}' - -set filename:orig %t wm-%[filename:orig].jpg`
         end
 
         def self.resize_in(orig, dest, size, compression)
