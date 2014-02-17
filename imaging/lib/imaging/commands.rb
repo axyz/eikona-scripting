@@ -56,6 +56,8 @@ module Imaging
             ls_img(".").each { |img| `cp #{img} #{dest}` }
             Dir.chdir dest
             ls_img(".").each { |img| resize(img, size, compression) }
+            Dir.chdir ".."
+            Dir.chdir ".."
         end
     end
 end
