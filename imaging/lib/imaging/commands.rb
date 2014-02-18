@@ -2,9 +2,9 @@ require 'digest'
 
 module Imaging
     module Commands
-        HOME = `echo $HOME`.sub("\n", "")
-        MOGRIFY = "mogrify"
-        CONVERT = "convert"
+        HOME = Dir.home
+        MOGRIFY = "/opt/ImageMagick/bin/mogrify"
+        CONVERT = "/opt/ImageMagick/bin/convert"
         SRGB = "#{HOME}/icc/sRGB.icc"
         FILTER = "lanczos -define filter:lobes=8"
         WATERMARK = {

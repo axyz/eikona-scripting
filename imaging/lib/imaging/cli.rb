@@ -10,7 +10,7 @@ module Imaging
             Workflow.web_large(path)
         end
 
-        desc "resize [WIDTHxHEIGHT] [--watermark type] [path]", "create subfolder named as [WIDTHxHEIGHT] and put inside resized images"
+        desc "resize [PATH] [--watermark type] [WIDTHxHEIGHT]", "create subfolder named as [WIDTHxHEIGHT] and put inside resized images"
         option :watermark
         def resize(path, size="3000x2000")
            Commands.resize_in(path, size, size, 90)
