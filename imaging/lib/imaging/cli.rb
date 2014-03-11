@@ -14,8 +14,8 @@ module Imaging
         option :watermark
         def resize(path, size="3000x2000")
            Commands.resize_in(path, size, size, 90)
-           if options[:watermark] then
-               Dir.chdir path
+           if options[:watermark] then#
+               Dir.chdir "#{path.split('/').last}"
                Dir.chdir size
                Commands.ls_img(".").each { |img| Commands.watermark(options[:watermark].to_sym, img) }
            end

@@ -3,8 +3,10 @@ require 'digest'
 module Imaging
     module Commands
         HOME = Dir.home
+        ASSETS = "#{File.expand_path(File.dirname(__FILE__))}/../assets"
         MOGRIFY = "/opt/ImageMagick/bin/mogrify"
         CONVERT = "/opt/ImageMagick/bin/convert"
+        COMPOSITE = "/opt/ImageMagick/bin/composite"
         SRGB = "#{HOME}/icc/sRGB.icc"
         FILTER = "lanczos -define filter:lobes=8"
         WATERMARK = {
@@ -43,17 +45,17 @@ module Imaging
         end
 
         def self.resize(path, size, compression)
-            `#{MOGRIFY} -profile '#{SRGB}' -filter #{FILTER} -resize #{size} -format jpg -quality #{compression} -sampling-factor 4:4:4 -interlace line -density 72 #{path}`
+            `#{MOGRIFY} -profile '#{SRGB}' -filter #{FILTER} -resize #{size} -format jpg -quality #{compression} -sampling-factor 4:4:4 -interlace line -density 72 '#{path}'`
         end
 
         def self.watermark(type, path)
-            `#{CONVERT} '#{HOME}/#{WATERMARK[type][:path]}' -resize #{get_w(path)*WATERMARK[type][:scale]} miff:- | convert -compose #{WATERMARK[type][:compose_method]} -composite -geometry +#{(get_w(path)*WATERMARK[type][:x_rel_offset]).to_i}+#{(get_h(path)*WATERMARK[type][:y_rel_offset]).to_i} -gravity #{WATERMARK[type][:gravity]} '#{path}' - -set filename:orig %t wm-%[filename:orig].jpg`
+            `#{COMPOSITE} -compose #{WATERMARK[type][:compose_method]} #{ASSETS}/#{WATERMARK[type][:path]} -geometry #{get_w(path)*WATERMARK[type][:scale]}x+#{(get_w(path)*WATERMARK[type][:x_rel_offset]).to_i}+#{(get_h(path)*WATERMARK[type][:y_rel_offset]).to_i} -gravity #{WATERMARK[type][:gravity]} '#{path}' 'wm-#{path}'`
         end
 
         def self.resize_in(orig, dest, size, compression)
             Dir.chdir orig
             FileUtils.mkdir_p dest
-            ls_img(".").each { |img| `cp #{img} #{dest}` }
+            ls_img(".").each { |img| `cp '#{img}' '#{dest}'` }
             Dir.chdir dest
             ls_img(".").each { |img| resize(img, size, compression) }
             Dir.chdir ".."
