@@ -2,12 +2,11 @@ require 'digest'
 
 module Imaging
     module Commands
-        HOME = Dir.home
         ASSETS = "#{File.expand_path(File.dirname(__FILE__))}/../assets"
         MOGRIFY = "/opt/ImageMagick/bin/mogrify"
         CONVERT = "/opt/ImageMagick/bin/convert"
         COMPOSITE = "/opt/ImageMagick/bin/composite"
-        SRGB = "#{HOME}/icc/sRGB.icc"
+        SRGB = "#{ASSETS}/sRGB.icc"
         FILTER = "lanczos -define filter:lobes=8"
         WATERMARK = {
                         :big => {
@@ -37,11 +36,11 @@ module Imaging
         end
 
         def self.get_h(path)
-            `convert '#{path}' -format "%h" info:`.sub("\n", "").to_i 
+            `#{CONVERT} '#{path}' -format "%h" info:`.sub("\n", "").to_i 
         end
 
         def self.get_w(path)
-            `convert '#{path}' -format "%w" info:`.sub("\n", "").to_i
+            `#{CONVERT} '#{path}' -format "%w" info:`.sub("\n", "").to_i
         end
 
         def self.resize(path, size, compression)

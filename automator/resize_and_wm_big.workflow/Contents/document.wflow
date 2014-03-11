@@ -113,7 +113,7 @@
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>411.000000:700.000000</string>
+				<string>690.000000:879.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Set Value of Variable.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
@@ -294,7 +294,7 @@
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>411.000000:596.000000</string>
+				<string>690.000000:775.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Ask for Text.action/Contents/Resources/Italian.lproj/main.nib</string>
 			</dict>
@@ -404,7 +404,7 @@
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>411.000000:414.000000</string>
+				<string>690.000000:593.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Set Value of Variable.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
@@ -447,9 +447,11 @@
 				<dict>
 					<key>Container</key>
 					<string>List</string>
+					<key>Optional</key>
+					<true/>
 					<key>Types</key>
 					<array>
-						<string>*</string>
+						<string>com.apple.cocoa.string</string>
 					</array>
 				</dict>
 				<key>AMRequiredResources</key>
@@ -514,7 +516,7 @@
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>411.000000:310.000000</string>
+				<string>690.000000:489.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Get Value of Variable.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
@@ -575,7 +577,7 @@
 size = ARGV[0]
 path = ARGV[1]
 
-Imaging::CLI.start ["resize", path, "--watermark", "big", size]
+Imaging::CLI.start ["resize", path.to_s, "--watermark", "big", size.to_s]
 
 
 </string>
@@ -691,7 +693,7 @@ Imaging::CLI.start ["resize", path, "--watermark", "big", size]
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>411.000000:207.000000</string>
+				<string>690.000000:386.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/Italian.lproj/main.nib</string>
 			</dict>
@@ -701,28 +703,28 @@ Imaging::CLI.start ["resize", path, "--watermark", "big", size]
 	</array>
 	<key>connectors</key>
 	<dict>
-		<key>59B15FC9-6560-44EE-8715-8119E2B7277F</key>
-		<dict>
-			<key>from</key>
-			<string>3F6FDA39-AAA3-4AC6-86AC-26023EC91317 - 3F6FDA39-AAA3-4AC6-86AC-26023EC91317</string>
-			<key>to</key>
-			<string>EC887EE0-C478-49D8-BC4D-2A5EA0C45E3E - EC887EE0-C478-49D8-BC4D-2A5EA0C45E3E</string>
-		</dict>
-		<key>9D204B75-D07E-4B74-B612-574B45239B41</key>
+		<key>5DE6CD76-B28D-42A6-B3A6-8C48C4BF885A</key>
 		<dict>
 			<key>from</key>
 			<string>EC887EE0-C478-49D8-BC4D-2A5EA0C45E3E - EC887EE0-C478-49D8-BC4D-2A5EA0C45E3E</string>
 			<key>to</key>
 			<string>8379FBD0-C5E4-47CD-B94C-AB360018EB41 - 8379FBD0-C5E4-47CD-B94C-AB360018EB41</string>
 		</dict>
-		<key>E3A78083-83CA-4F7E-925F-68070461004C</key>
+		<key>7A760943-27DE-456A-94A3-EF4AC151C758</key>
 		<dict>
 			<key>from</key>
 			<string>8379FBD0-C5E4-47CD-B94C-AB360018EB41 - 8379FBD0-C5E4-47CD-B94C-AB360018EB41</string>
 			<key>to</key>
 			<string>D30C743D-E7A2-41BA-9279-E12C71E5C975 - D30C743D-E7A2-41BA-9279-E12C71E5C975</string>
 		</dict>
-		<key>E89070FD-C275-4309-8A1B-83DD637D9DDD</key>
+		<key>9C1583BE-F47E-4436-833D-9EB6B8F2EA68</key>
+		<dict>
+			<key>from</key>
+			<string>3F6FDA39-AAA3-4AC6-86AC-26023EC91317 - 3F6FDA39-AAA3-4AC6-86AC-26023EC91317</string>
+			<key>to</key>
+			<string>EC887EE0-C478-49D8-BC4D-2A5EA0C45E3E - EC887EE0-C478-49D8-BC4D-2A5EA0C45E3E</string>
+		</dict>
+		<key>E3689CA4-9C56-4711-899E-BE4BB2A39026</key>
 		<dict>
 			<key>from</key>
 			<string>F9D4F05A-3DC3-4D41-8B6F-9DAD771C1B22 - F9D4F05A-3DC3-4D41-8B6F-9DAD771C1B22</string>
